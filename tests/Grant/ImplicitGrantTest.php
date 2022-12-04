@@ -24,12 +24,9 @@ use PHPUnit\Framework\TestCase;
 
 class ImplicitGrantTest extends TestCase
 {
-    const DEFAULT_SCOPE = 'basic';
+    private const DEFAULT_SCOPE = 'basic';
 
-    /**
-     * CryptTrait stub
-     */
-    protected $cryptStub;
+    protected CryptTraitStub $cryptStub;
 
     public function setUp(): void
     {

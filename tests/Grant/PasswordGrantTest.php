@@ -23,7 +23,7 @@ use PHPUnit\Framework\TestCase;
 
 class PasswordGrantTest extends TestCase
 {
-    const DEFAULT_SCOPE = 'basic';
+    private const DEFAULT_SCOPE = 'basic';
 
     public function testGetIdentifier()
     {

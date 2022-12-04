@@ -23,10 +23,7 @@ use PHPUnit\Framework\TestCase;
 
 class RefreshTokenGrantTest extends TestCase
 {
-    /**
-     * @var CryptTraitStub
-     */
-    protected $cryptStub;
+    protected CryptTraitStub $cryptStub;
 
     public function setUp(): void
     {

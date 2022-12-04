@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 
 class CryptTraitTest extends TestCase
 {
-    protected $cryptStub;
+    protected CryptTraitStub $cryptStub;
 
     protected function setUp(): void
     {

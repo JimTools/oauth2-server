@@ -21,7 +21,7 @@ class StubResponseType extends AbstractResponseType
         return $this->accessToken;
     }
 
-    public function getRefreshToken(): RefreshTokenEntityInterface
+    public function getRefreshToken(): ?RefreshTokenEntityInterface
     {
         return $this->refreshToken;
     }

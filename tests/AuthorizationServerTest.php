@@ -31,7 +31,7 @@ use Psr\Http\Message\ServerRequestInterface;
 
 class AuthorizationServerTest extends TestCase
 {
-    const DEFAULT_SCOPE = 'basic';
+    private const DEFAULT_SCOPE = 'basic';
 
     public function setUp(): void
     {

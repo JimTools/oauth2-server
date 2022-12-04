@@ -8,6 +8,7 @@ use League\OAuth2\Server\CryptKey;
 use League\OAuth2\Server\Entities\AccessTokenEntityInterface;
 use League\OAuth2\Server\Entities\AuthCodeEntityInterface;
 use League\OAuth2\Server\Entities\RefreshTokenEntityInterface;
+use League\OAuth2\Server\Exception\OAuthServerException;
 use League\OAuth2\Server\Grant\AbstractGrant;
 use League\OAuth2\Server\Repositories\AccessTokenRepositoryInterface;
 use League\OAuth2\Server\Repositories\AuthCodeRepositoryInterface;
@@ -116,7 +117,7 @@ class AbstractGrantTest extends TestCase
         $getClientCredentialsMethod = $abstractGrantReflection->getMethod('getClientCredentials');
         $getClientCredentialsMethod->setAccessible(true);
 
-        $this->expectException(\League\OAuth2\Server\Exception\OAuthServerException::class);
+        $this->expectException(OAuthServerException::class);
 
         $getClientCredentialsMethod->invoke($grantMock, $serverRequest, true, true);
     }
@@ -189,7 +190,7 @@ class AbstractGrantTest extends TestCase
         $validateClientMethod = $abstractGrantReflection->getMethod('validateClient');
         $validateClientMethod->setAccessible(true);
 
-        $this->expectException(\League\OAuth2\Server\Exception\OAuthServerException::class);
+        $this->expectException(OAuthServerException::class);
 
         $validateClientMethod->invoke($grantMock, $serverRequest, true, true);
     }
@@ -212,7 +213,7 @@ class AbstractGrantTest extends TestCase
         $validateClientMethod = $abstractGrantReflection->getMethod('validateClient');
         $validateClientMethod->setAccessible(true);
 
-        $this->expectException(\League\OAuth2\Server\Exception\OAuthServerException::class);
+        $this->expectException(OAuthServerException::class);
 
         $validateClientMethod->invoke($grantMock, $serverRequest, true, true);
     }
@@ -236,7 +237,7 @@ class AbstractGrantTest extends TestCase
         $validateClientMethod = $abstractGrantReflection->getMethod('validateClient');
         $validateClientMethod->setAccessible(true);
 
-        $this->expectException(\League\OAuth2\Server\Exception\OAuthServerException::class);
+        $this->expectException(OAuthServerException::class);
 
         $validateClientMethod->invoke($grantMock, $serverRequest, true, true);
     }
@@ -262,7 +263,7 @@ class AbstractGrantTest extends TestCase
         $validateClientMethod = $abstractGrantReflection->getMethod('validateClient');
         $validateClientMethod->setAccessible(true);
 
-        $this->expectException(\League\OAuth2\Server\Exception\OAuthServerException::class);
+        $this->expectException(OAuthServerException::class);
 
         $validateClientMethod->invoke($grantMock, $serverRequest, true, true);
     }
@@ -288,7 +289,7 @@ class AbstractGrantTest extends TestCase
         $validateClientMethod = $abstractGrantReflection->getMethod('validateClient');
         $validateClientMethod->setAccessible(true);
 
-        $this->expectException(\League\OAuth2\Server\Exception\OAuthServerException::class);
+        $this->expectException(OAuthServerException::class);
 
         $validateClientMethod->invoke($grantMock, $serverRequest, true, true);
     }
@@ -314,7 +315,7 @@ class AbstractGrantTest extends TestCase
         $validateClientMethod = $abstractGrantReflection->getMethod('validateClient');
         $validateClientMethod->setAccessible(true);
 
-        $this->expectException(\League\OAuth2\Server\Exception\OAuthServerException::class);
+        $this->expectException(OAuthServerException::class);
 
         $validateClientMethod->invoke($grantMock, $serverRequest, true, true);
     }
@@ -338,7 +339,7 @@ class AbstractGrantTest extends TestCase
         $validateClientMethod = $abstractGrantReflection->getMethod('validateClient');
         $validateClientMethod->setAccessible(true);
 
-        $this->expectException(\League\OAuth2\Server\Exception\OAuthServerException::class);
+        $this->expectException(OAuthServerException::class);
 
         $validateClientMethod->invoke($grantMock, $serverRequest, true);
     }
@@ -507,7 +508,7 @@ class AbstractGrantTest extends TestCase
         $grantMock = $this->getMockForAbstractClass(AbstractGrant::class);
         $grantMock->setScopeRepository($scopeRepositoryMock);
 
-        $this->expectException(\League\OAuth2\Server\Exception\OAuthServerException::class);
+        $this->expectException(OAuthServerException::class);
 
         $grantMock->validateScopes('basic   ');
     }

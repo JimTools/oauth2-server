@@ -20,7 +20,7 @@ use PHPUnit\Framework\TestCase;
 
 class AuthorizationServerMiddlewareTest extends TestCase
 {
-    const DEFAULT_SCOPE = 'basic';
+    private const DEFAULT_SCOPE = 'basic';
 
     public function testValidResponse()
     {
