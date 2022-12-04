@@ -213,6 +213,7 @@ class ImplicitGrantTest extends TestCase
         $authRequest->setUser(new UserEntity());
 
         $accessToken = new AccessTokenEntity();
+        $accessToken->setIdentifier('foo');
         $accessToken->setClient($client);
 
         $accessTokenRepositoryMock = $this->getMockBuilder(AccessTokenRepositoryInterface::class)->getMock();
@@ -268,6 +269,7 @@ class ImplicitGrantTest extends TestCase
         $authRequest->setUser(new UserEntity());
 
         $accessToken = new AccessTokenEntity();
+        $accessToken->setIdentifier('foo');
         $accessToken->setClient($client);
 
         /** @var AccessTokenRepositoryInterface|\PHPUnit\Framework\MockObject\MockObject $accessTokenRepositoryMock */

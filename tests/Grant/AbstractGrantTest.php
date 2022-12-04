@@ -129,6 +129,7 @@ class AbstractGrantTest extends TestCase
 
         $clientRepositoryMock = $this->getMockBuilder(ClientRepositoryInterface::class)->getMock();
         $clientRepositoryMock->method('getClientEntity')->willReturn($client);
+        $clientRepositoryMock->method('validateClient')->with('foo', null, '')->willReturn(true);
 
         /** @var AbstractGrant $grantMock */
         $grantMock = $this->getMockForAbstractClass(AbstractGrant::class);
@@ -154,6 +155,7 @@ class AbstractGrantTest extends TestCase
 
         $clientRepositoryMock = $this->getMockBuilder(ClientRepositoryInterface::class)->getMock();
         $clientRepositoryMock->method('getClientEntity')->willReturn($client);
+        $clientRepositoryMock->method('validateClient')->with('foo', 'bar', '')->willReturn(true);
 
         /** @var AbstractGrant $grantMock */
         $grantMock = $this->getMockForAbstractClass(AbstractGrant::class);
@@ -439,6 +441,9 @@ class AbstractGrantTest extends TestCase
         $issueAuthCodeMethod = $abstractGrantReflection->getMethod('issueAuthCode');
         $issueAuthCodeMethod->setAccessible(true);
 
+        $scope = new ScopeEntity();
+        $scope->setIdentifier('read');
+
         $this->assertInstanceOf(
             AuthCodeEntityInterface::class,
             $issueAuthCodeMethod->invoke(
@@ -447,7 +452,7 @@ class AbstractGrantTest extends TestCase
                 new ClientEntity(),
                 123,
                 'http://foo/bar',
-                [new ScopeEntity()]
+                [$scope]
             )
         );
     }

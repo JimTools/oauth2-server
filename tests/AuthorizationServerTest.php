@@ -62,8 +62,16 @@ class AuthorizationServerTest extends TestCase
 
     public function testRespondToRequestInvalidGrantType()
     {
+        $client = new ClientEntity();
+        $client->setRedirectUri('http://foo/bar');
+
+        $clientRepository = $this->getMockBuilder(ClientRepositoryInterface::class)->getMock();
+        $clientRepository->method('getClientEntity')
+            ->with('foo')
+            ->willReturn($client);
+
         $server = new AuthorizationServer(
-            $this->getMockBuilder(ClientRepositoryInterface::class)->getMock(),
+            $clientRepository,
             $this->getMockBuilder(AccessTokenRepositoryInterface::class)->getMock(),
             $this->getMockBuilder(ScopeRepositoryInterface::class)->getMock(),
             'file://' . __DIR__ . '/Stubs/private.key',
@@ -85,11 +93,15 @@ class AuthorizationServerTest extends TestCase
     {
         $client = new ClientEntity();
 
+        $client->setIdentifier('foo');
         $client->setConfidential();
         $client->setRedirectUri('http://foo/bar');
 
         $clientRepository = $this->getMockBuilder(ClientRepositoryInterface::class)->getMock();
         $clientRepository->method('getClientEntity')->willReturn($client);
+        $clientRepository->method('validateClient')
+            ->with('foo', 'bar', 'client_credentials')
+            ->willReturn(true);
 
         $scope = new ScopeEntity();
         $scopeRepositoryMock = $this->getMockBuilder(ScopeRepositoryInterface::class)->getMock();
@@ -245,11 +257,16 @@ class AuthorizationServerTest extends TestCase
 
         $server->enableGrantType($grant);
 
+        $client = new ClientEntity();
+        $client->setIdentifier('123');
+
         $authRequest = new AuthorizationRequest();
         $authRequest->setAuthorizationApproved(true);
-        $authRequest->setClient(new ClientEntity());
+        $authRequest->setClient($client);
         $authRequest->setGrantTypeId('authorization_code');
         $authRequest->setUser(new UserEntity());
+        $authRequest->setCodeChallenge('code');
+        $authRequest->setCodeChallengeMethod('plain');
 
         $this->assertInstanceOf(
             ResponseInterface::class,
@@ -260,6 +277,7 @@ class AuthorizationServerTest extends TestCase
     public function testValidateAuthorizationRequest()
     {
         $client = new ClientEntity();
+        $client->setIdentifier('123');
         $client->setRedirectUri('http://foo/bar');
         $client->setConfidential();
         $clientRepositoryMock = $this->getMockBuilder(ClientRepositoryInterface::class)->getMock();
