@@ -14,5 +14,5 @@ interface UserEntityInterface
     /**
      * Return the user's identifier.
      */
-    public function getIdentifier(): mixed;
+    public function getIdentifier(): int|string|null;
 }

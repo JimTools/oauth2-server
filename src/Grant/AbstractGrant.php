@@ -277,7 +277,7 @@ abstract class AbstractGrant implements GrantTypeInterface
         string $parameter,
         ServerRequestInterface $request,
         mixed $default = null,
-    ): ?string
+    ): mixed
     {
         $requestParameters = (array) $request->getParsedBody();
 

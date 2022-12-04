@@ -380,7 +380,7 @@ class AuthCodeGrant extends AbstractAuthorizeGrant
     /**
      * Get the client redirect URI if not set in the request.
      */
-    private function getClientRedirectUri(AuthorizationRequest $authorizationRequest): string
+    private function getClientRedirectUri(AuthorizationRequest $authorizationRequest): ?string
     {
         return \is_array($authorizationRequest->getClient()->getRedirectUri())
                 ? $authorizationRequest->getClient()->getRedirectUri()[0]
