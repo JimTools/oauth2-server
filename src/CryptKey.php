@@ -21,27 +21,13 @@ class CryptKey
 
     private const FILE_PREFIX = 'file://';
 
-    /**
-     * @var string Key contents
-     */
-    protected $keyContents;
+    protected string|false $keyContents;
 
-    /**
-     * @var string
-     */
-    protected $keyPath;
+    protected string $keyPath;
 
-    /**
-     * @var null|string
-     */
-    protected $passPhrase;
+    protected ?string $passPhrase;
 
-    /**
-     * @param string      $keyPath
-     * @param null|string $passPhrase
-     * @param bool        $keyPermissionsCheck
-     */
-    public function __construct($keyPath, $passPhrase = null, $keyPermissionsCheck = true)
+    public function __construct(string $keyPath, string $passPhrase = null, bool $keyPermissionsCheck = true)
     {
         $this->passPhrase = $passPhrase;
 

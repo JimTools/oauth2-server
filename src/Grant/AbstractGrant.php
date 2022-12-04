@@ -44,59 +44,29 @@ abstract class AbstractGrant implements GrantTypeInterface
 {
     use EmitterAwareTrait, CryptTrait;
 
-    const SCOPE_DELIMITER_STRING = ' ';
+    public const SCOPE_DELIMITER_STRING = ' ';
 
-    const MAX_RANDOM_TOKEN_GENERATION_ATTEMPTS = 10;
+    public const MAX_RANDOM_TOKEN_GENERATION_ATTEMPTS = 10;
 
-    /**
-     * @var ClientRepositoryInterface
-     */
-    protected $clientRepository;
+    protected ClientRepositoryInterface $clientRepository;
 
-    /**
-     * @var AccessTokenRepositoryInterface
-     */
-    protected $accessTokenRepository;
+    protected AccessTokenRepositoryInterface $accessTokenRepository;
 
-    /**
-     * @var ScopeRepositoryInterface
-     */
-    protected $scopeRepository;
+    protected ScopeRepositoryInterface $scopeRepository;
 
-    /**
-     * @var AuthCodeRepositoryInterface
-     */
-    protected $authCodeRepository;
+    protected AuthCodeRepositoryInterface $authCodeRepository;
 
-    /**
-     * @var RefreshTokenRepositoryInterface
-     */
-    protected $refreshTokenRepository;
+    protected RefreshTokenRepositoryInterface $refreshTokenRepository;
 
-    /**
-     * @var UserRepositoryInterface
-     */
-    protected $userRepository;
+    protected UserRepositoryInterface $userRepository;
 
-    /**
-     * @var DateInterval
-     */
-    protected $refreshTokenTTL;
+    protected DateInterval $refreshTokenTTL;
 
-    /**
-     * @var CryptKey
-     */
-    protected $privateKey;
+    protected CryptKey $privateKey;
 
-    /**
-     * @var string
-     */
-    protected $defaultScope;
+    protected string $defaultScope;
 
-    /**
-     * @var bool
-     */
-    protected $revokeRefreshTokens;
+    protected bool $revokeRefreshTokens;
 
     /**
      * @param ClientRepositoryInterface $clientRepository

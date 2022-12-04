@@ -17,66 +17,50 @@ class AuthorizationRequest
 {
     /**
      * The grant type identifier
-     *
-     * @var string
      */
-    protected $grantTypeId;
+    protected string $grantTypeId;
 
     /**
      * The client identifier
-     *
-     * @var ClientEntityInterface
      */
-    protected $client;
+    protected ClientEntityInterface $client;
 
     /**
      * The user identifier
-     *
-     * @var UserEntityInterface
      */
-    protected $user;
+    protected UserEntityInterface $user;
 
     /**
      * An array of scope identifiers
      *
      * @var ScopeEntityInterface[]
      */
-    protected $scopes = [];
+    protected array $scopes = [];
 
     /**
      * Has the user authorized the authorization request
-     *
-     * @var bool
      */
-    protected $authorizationApproved = false;
+    protected bool $authorizationApproved = false;
 
     /**
      * The redirect URI used in the request
-     *
-     * @var string|null
      */
-    protected $redirectUri;
+    protected ?string $redirectUri;
 
     /**
      * The state parameter on the authorization request
-     *
-     * @var string|null
      */
-    protected $state;
+    protected ?string $state;
 
     /**
      * The code challenge (if provided)
-     *
-     * @var string
      */
-    protected $codeChallenge;
+    protected string $codeChallenge;
 
     /**
      * The code challenge method (if provided)
-     *
-     * @var string
      */
-    protected $codeChallengeMethod;
+    protected string $codeChallengeMethod;
 
     /**
      * @return string

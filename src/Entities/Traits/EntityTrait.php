@@ -11,23 +11,14 @@ namespace League\OAuth2\Server\Entities\Traits;
 
 trait EntityTrait
 {
-    /**
-     * @var string
-     */
-    protected $identifier;
+    protected mixed $identifier;
 
-    /**
-     * @return mixed
-     */
-    public function getIdentifier()
+    public function getIdentifier(): mixed
     {
         return $this->identifier;
     }
 
-    /**
-     * @param mixed $identifier
-     */
-    public function setIdentifier($identifier)
+    public function setIdentifier(mixed $identifier): void
     {
         $this->identifier = $identifier;
     }

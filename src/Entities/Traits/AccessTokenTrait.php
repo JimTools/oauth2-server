@@ -20,15 +20,9 @@ use League\OAuth2\Server\Entities\ScopeEntityInterface;
 
 trait AccessTokenTrait
 {
-    /**
-     * @var CryptKey
-     */
-    private $privateKey;
+    private CryptKey $privateKey;
 
-    /**
-     * @var Configuration
-     */
-    private $jwtConfiguration;
+    private Configuration $jwtConfiguration;
 
     /**
      * Set the private key used to encrypt this access token.

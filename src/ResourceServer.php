@@ -17,20 +17,11 @@ use Psr\Http\Message\ServerRequestInterface;
 
 class ResourceServer
 {
-    /**
-     * @var AccessTokenRepositoryInterface
-     */
-    private $accessTokenRepository;
+    private AccessTokenRepositoryInterface $accessTokenRepository;
 
-    /**
-     * @var CryptKey
-     */
-    private $publicKey;
+    private string|CryptKey $publicKey;
 
-    /**
-     * @var null|AuthorizationValidatorInterface
-     */
-    private $authorizationValidator;
+    private ?AuthorizationValidatorInterface $authorizationValidator;
 
     /**
      * New server instance.

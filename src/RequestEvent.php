@@ -14,17 +14,14 @@ use Psr\Http\Message\ServerRequestInterface;
 
 class RequestEvent extends Event
 {
-    const CLIENT_AUTHENTICATION_FAILED = 'client.authentication.failed';
-    const USER_AUTHENTICATION_FAILED = 'user.authentication.failed';
-    const REFRESH_TOKEN_CLIENT_FAILED = 'refresh_token.client.failed';
+    public const CLIENT_AUTHENTICATION_FAILED = 'client.authentication.failed';
+    public const USER_AUTHENTICATION_FAILED = 'user.authentication.failed';
+    public const REFRESH_TOKEN_CLIENT_FAILED = 'refresh_token.client.failed';
 
-    const REFRESH_TOKEN_ISSUED = 'refresh_token.issued';
-    const ACCESS_TOKEN_ISSUED = 'access_token.issued';
+    public const REFRESH_TOKEN_ISSUED = 'refresh_token.issued';
+    public const ACCESS_TOKEN_ISSUED = 'access_token.issued';
 
-    /**
-     * @var ServerRequestInterface
-     */
-    private $request;
+    private ServerRequestInterface $request;
 
     /**
      * RequestEvent constructor.

@@ -22,15 +22,9 @@ use Psr\Http\Message\ServerRequestInterface;
 
 class ImplicitGrant extends AbstractAuthorizeGrant
 {
-    /**
-     * @var DateInterval
-     */
-    private $accessTokenTTL;
+    private DateInterval $accessTokenTTL;
 
-    /**
-     * @var string
-     */
-    private $queryDelimiter;
+    private string $queryDelimiter;
 
     /**
      * @param DateInterval $accessTokenTTL

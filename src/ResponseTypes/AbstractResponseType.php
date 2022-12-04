@@ -20,20 +20,11 @@ abstract class AbstractResponseType implements ResponseTypeInterface
 {
     use CryptTrait;
 
-    /**
-     * @var AccessTokenEntityInterface
-     */
-    protected $accessToken;
+    protected AccessTokenEntityInterface $accessToken;
 
-    /**
-     * @var RefreshTokenEntityInterface
-     */
-    protected $refreshToken;
+    protected RefreshTokenEntityInterface $refreshToken;
 
-    /**
-     * @var CryptKey
-     */
-    protected $privateKey;
+    protected CryptKey $privateKey;
 
     /**
      * {@inheritdoc}

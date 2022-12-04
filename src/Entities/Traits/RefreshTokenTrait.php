@@ -14,15 +14,9 @@ use League\OAuth2\Server\Entities\AccessTokenEntityInterface;
 
 trait RefreshTokenTrait
 {
-    /**
-     * @var AccessTokenEntityInterface
-     */
-    protected $accessToken;
+    protected AccessTokenEntityInterface $accessToken;
 
-    /**
-     * @var DateTimeImmutable
-     */
-    protected $expiryDateTime;
+    protected DateTimeImmutable $expiryDateTime;
 
     /**
      * {@inheritdoc}

@@ -14,10 +14,7 @@ use Psr\Http\Message\ServerRequestInterface;
 
 class RequestRefreshTokenEvent extends RequestEvent
 {
-    /**
-     * @var RefreshTokenEntityInterface
-     */
-    private $refreshToken;
+    private RefreshTokenEntityInterface $refreshToken;
 
     /**
      * @param string                 $name

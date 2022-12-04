@@ -9,6 +9,7 @@
 
 namespace League\OAuth2\Server\AuthorizationValidators;
 
+use DateInterval;
 use DateTimeZone;
 use Lcobucci\Clock\SystemClock;
 use Lcobucci\JWT\Configuration;
@@ -28,25 +29,13 @@ class BearerTokenValidator implements AuthorizationValidatorInterface
 {
     use CryptTrait;
 
-    /**
-     * @var AccessTokenRepositoryInterface
-     */
-    private $accessTokenRepository;
+    private AccessTokenRepositoryInterface $accessTokenRepository;
 
-    /**
-     * @var CryptKey
-     */
-    protected $publicKey;
+    protected CryptKey $publicKey;
 
-    /**
-     * @var Configuration
-     */
-    private $jwtConfiguration;
+    private Configuration $jwtConfiguration;
 
-    /**
-     * @var \DateInterval|null
-     */
-    private $jwtValidAtDateLeeway;
+    private ?DateInterval $jwtValidAtDateLeeway;
 
     /**
      * @param AccessTokenRepositoryInterface $accessTokenRepository

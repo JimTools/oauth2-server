@@ -15,10 +15,7 @@ use Psr\Http\Message\ResponseInterface;
 
 class RedirectResponse extends AbstractResponseType
 {
-    /**
-     * @var string
-     */
-    private $redirectUri;
+    private string $redirectUri;
 
     /**
      * @param string $redirectUri

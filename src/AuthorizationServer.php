@@ -32,57 +32,30 @@ class AuthorizationServer implements EmitterAwareInterface
     /**
      * @var GrantTypeInterface[]
      */
-    protected $enabledGrantTypes = [];
+    protected array $enabledGrantTypes = [];
 
     /**
      * @var DateInterval[]
      */
-    protected $grantTypeAccessTokenTTL = [];
+    protected array $grantTypeAccessTokenTTL = [];
 
-    /**
-     * @var CryptKey
-     */
-    protected $privateKey;
+    protected string|CryptKey $privateKey;
 
-    /**
-     * @var CryptKey
-     */
-    protected $publicKey;
+    protected CryptKey $publicKey;
 
-    /**
-     * @var ResponseTypeInterface
-     */
-    protected $responseType;
+    protected ResponseTypeInterface $responseType;
 
-    /**
-     * @var ClientRepositoryInterface
-     */
-    private $clientRepository;
+    private ClientRepositoryInterface $clientRepository;
 
-    /**
-     * @var AccessTokenRepositoryInterface
-     */
-    private $accessTokenRepository;
+    private AccessTokenRepositoryInterface $accessTokenRepository;
 
-    /**
-     * @var ScopeRepositoryInterface
-     */
-    private $scopeRepository;
+    private ScopeRepositoryInterface $scopeRepository;
 
-    /**
-     * @var string|Key
-     */
-    private $encryptionKey;
+    private string|Key $encryptionKey;
 
-    /**
-     * @var string
-     */
-    private $defaultScope = '';
+    private string $defaultScope = '';
 
-    /**
-     * @var bool
-     */
-    private $revokeRefreshTokens = true;
+    private bool $revokeRefreshTokens = true;
 
     /**
      * New server instance.
