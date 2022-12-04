@@ -13,10 +13,6 @@ interface RedirectUriValidatorInterface
 {
     /**
      * Validates the redirect uri.
-     *
-     * @param string $redirectUri
-     *
-     * @return bool Return true if valid, false otherwise
      */
-    public function validateRedirectUri($redirectUri);
+    public function validateRedirectUri(string $redirectUri): bool;
 }

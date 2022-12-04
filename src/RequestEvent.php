@@ -25,21 +25,17 @@ class RequestEvent extends Event
 
     /**
      * RequestEvent constructor.
-     *
-     * @param string                 $name
-     * @param ServerRequestInterface $request
      */
-    public function __construct($name, ServerRequestInterface $request)
+    public function __construct(string $name, ServerRequestInterface $request)
     {
         parent::__construct($name);
         $this->request = $request;
     }
 
     /**
-     * @return ServerRequestInterface
      * @codeCoverageIgnore
      */
-    public function getRequest()
+    public function getRequest(): ServerRequestInterface
     {
         return $this->request;
     }

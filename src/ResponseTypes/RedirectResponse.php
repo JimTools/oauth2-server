@@ -17,20 +17,12 @@ class RedirectResponse extends AbstractResponseType
 {
     private string $redirectUri;
 
-    /**
-     * @param string $redirectUri
-     */
-    public function setRedirectUri($redirectUri)
+    public function setRedirectUri(string $redirectUri)
     {
         $this->redirectUri = $redirectUri;
     }
 
-    /**
-     * @param ResponseInterface $response
-     *
-     * @return ResponseInterface
-     */
-    public function generateHttpResponse(ResponseInterface $response)
+    public function generateHttpResponse(ResponseInterface $response): ResponseInterface
     {
         return $response->withStatus(302)->withHeader('Location', $this->redirectUri);
     }

@@ -26,11 +26,7 @@ class ImplicitGrant extends AbstractAuthorizeGrant
 
     private string $queryDelimiter;
 
-    /**
-     * @param DateInterval $accessTokenTTL
-     * @param string       $queryDelimiter
-     */
-    public function __construct(DateInterval $accessTokenTTL, $queryDelimiter = '#')
+    public function __construct(DateInterval $accessTokenTTL, string $queryDelimiter = '#')
     {
         $this->accessTokenTTL = $accessTokenTTL;
         $this->queryDelimiter = $queryDelimiter;
@@ -41,17 +37,15 @@ class ImplicitGrant extends AbstractAuthorizeGrant
      *
      * @throw LogicException
      */
-    public function setRefreshTokenTTL(DateInterval $refreshTokenTTL)
+    public function setRefreshTokenTTL(DateInterval $refreshTokenTTL): void
     {
         throw new LogicException('The Implicit Grant does not return refresh tokens');
     }
 
     /**
-     * @param RefreshTokenRepositoryInterface $refreshTokenRepository
-     *
      * @throw LogicException
      */
-    public function setRefreshTokenRepository(RefreshTokenRepositoryInterface $refreshTokenRepository)
+    public function setRefreshTokenRepository(RefreshTokenRepositoryInterface $refreshTokenRepository): void
     {
         throw new LogicException('The Implicit Grant does not return refresh tokens');
     }
@@ -59,42 +53,34 @@ class ImplicitGrant extends AbstractAuthorizeGrant
     /**
      * {@inheritdoc}
      */
-    public function canRespondToAccessTokenRequest(ServerRequestInterface $request)
+    public function canRespondToAccessTokenRequest(ServerRequestInterface $request): bool
     {
         return false;
     }
 
     /**
      * Return the grant identifier that can be used in matching up requests.
-     *
-     * @return string
      */
-    public function getIdentifier()
+    public function getIdentifier(): string
     {
         return 'implicit';
     }
 
     /**
-     * Respond to an incoming request.
-     *
-     * @param ServerRequestInterface $request
-     * @param ResponseTypeInterface  $responseType
-     * @param DateInterval           $accessTokenTTL
-     *
-     * @return ResponseTypeInterface
+     * {@inheritDoc}
      */
     public function respondToAccessTokenRequest(
         ServerRequestInterface $request,
         ResponseTypeInterface $responseType,
         DateInterval $accessTokenTTL
-    ) {
+    ): ResponseTypeInterface {
         throw new LogicException('This grant does not used this method');
     }
 
     /**
      * {@inheritdoc}
      */
-    public function canRespondToAuthorizationRequest(ServerRequestInterface $request)
+    public function canRespondToAuthorizationRequest(ServerRequestInterface $request): bool
     {
         return (
             isset($request->getQueryParams()['response_type'])
@@ -106,7 +92,7 @@ class ImplicitGrant extends AbstractAuthorizeGrant
     /**
      * {@inheritdoc}
      */
-    public function validateAuthorizationRequest(ServerRequestInterface $request)
+    public function validateAuthorizationRequest(ServerRequestInterface $request): AuthorizationRequest
     {
         $clientId = $this->getQueryStringParameter(
             'client_id',
@@ -166,7 +152,7 @@ class ImplicitGrant extends AbstractAuthorizeGrant
     /**
      * {@inheritdoc}
      */
-    public function completeAuthorizationRequest(AuthorizationRequest $authorizationRequest)
+    public function completeAuthorizationRequest(AuthorizationRequest $authorizationRequest): ResponseTypeInterface
     {
         if ($authorizationRequest->getUser() instanceof UserEntityInterface === false) {
             throw new LogicException('An instance of UserEntityInterface should be set on the AuthorizationRequest');

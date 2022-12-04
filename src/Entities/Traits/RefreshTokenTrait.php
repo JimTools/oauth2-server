@@ -21,7 +21,7 @@ trait RefreshTokenTrait
     /**
      * {@inheritdoc}
      */
-    public function setAccessToken(AccessTokenEntityInterface $accessToken)
+    public function setAccessToken(AccessTokenEntityInterface $accessToken): void
     {
         $this->accessToken = $accessToken;
     }
@@ -29,27 +29,23 @@ trait RefreshTokenTrait
     /**
      * {@inheritdoc}
      */
-    public function getAccessToken()
+    public function getAccessToken(): AccessTokenEntityInterface
     {
         return $this->accessToken;
     }
 
     /**
      * Get the token's expiry date time.
-     *
-     * @return DateTimeImmutable
      */
-    public function getExpiryDateTime()
+    public function getExpiryDateTime(): DateTimeImmutable
     {
         return $this->expiryDateTime;
     }
 
     /**
      * Set the date time when the token expires.
-     *
-     * @param DateTimeImmutable $dateTime
      */
-    public function setExpiryDateTime(DateTimeImmutable $dateTime)
+    public function setExpiryDateTime(DateTimeImmutable $dateTime): void
     {
         $this->expiryDateTime = $dateTime;
     }

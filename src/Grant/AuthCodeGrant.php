@@ -42,10 +42,6 @@ class AuthCodeGrant extends AbstractAuthorizeGrant
     private array $codeChallengeVerifiers = [];
 
     /**
-     * @param AuthCodeRepositoryInterface     $authCodeRepository
-     * @param RefreshTokenRepositoryInterface $refreshTokenRepository
-     * @param DateInterval                    $authCodeTTL
-     *
      * @throws Exception
      */
     public function __construct(
@@ -70,27 +66,19 @@ class AuthCodeGrant extends AbstractAuthorizeGrant
     /**
      * Disable the requirement for a code challenge for public clients.
      */
-    public function disableRequireCodeChallengeForPublicClients()
+    public function disableRequireCodeChallengeForPublicClients(): void
     {
         $this->requireCodeChallengeForPublicClients = false;
     }
 
     /**
-     * Respond to an access token request.
-     *
-     * @param ServerRequestInterface $request
-     * @param ResponseTypeInterface  $responseType
-     * @param DateInterval           $accessTokenTTL
-     *
-     * @throws OAuthServerException
-     *
-     * @return ResponseTypeInterface
+     * {@inheritDoc}
      */
     public function respondToAccessTokenRequest(
         ServerRequestInterface $request,
         ResponseTypeInterface $responseType,
         DateInterval $accessTokenTTL
-    ) {
+    ): ResponseTypeInterface {
         list($clientId) = $this->getClientCredentials($request);
 
         $client = $this->getClientEntityOrFail($clientId, $request);
@@ -178,15 +166,13 @@ class AuthCodeGrant extends AbstractAuthorizeGrant
     /**
      * Validate the authorization code.
      *
-     * @param stdClass               $authCodePayload
-     * @param ClientEntityInterface  $client
-     * @param ServerRequestInterface $request
+     * @throws OAuthServerException
      */
     private function validateAuthorizationCode(
-        $authCodePayload,
+        stdClass $authCodePayload,
         ClientEntityInterface $client,
         ServerRequestInterface $request
-    ) {
+    ): void {
         if (!\property_exists($authCodePayload, 'auth_code_id')) {
             throw OAuthServerException::invalidRequest('code', 'Authorization code malformed');
         }
@@ -216,10 +202,8 @@ class AuthCodeGrant extends AbstractAuthorizeGrant
 
     /**
      * Return the grant identifier that can be used in matching up requests.
-     *
-     * @return string
      */
-    public function getIdentifier()
+    public function getIdentifier(): string
     {
         return 'authorization_code';
     }
@@ -227,7 +211,7 @@ class AuthCodeGrant extends AbstractAuthorizeGrant
     /**
      * {@inheritdoc}
      */
-    public function canRespondToAuthorizationRequest(ServerRequestInterface $request)
+    public function canRespondToAuthorizationRequest(ServerRequestInterface $request): bool
     {
         return (
             \array_key_exists('response_type', $request->getQueryParams())
@@ -239,7 +223,7 @@ class AuthCodeGrant extends AbstractAuthorizeGrant
     /**
      * {@inheritdoc}
      */
-    public function validateAuthorizationRequest(ServerRequestInterface $request)
+    public function validateAuthorizationRequest(ServerRequestInterface $request): AuthorizationRequest
     {
         $clientId = $this->getQueryStringParameter(
             'client_id',
@@ -319,7 +303,10 @@ class AuthCodeGrant extends AbstractAuthorizeGrant
             $authorizationRequest->setCodeChallenge($codeChallenge);
             $authorizationRequest->setCodeChallengeMethod($codeChallengeMethod);
         } elseif ($this->requireCodeChallengeForPublicClients && !$client->isConfidential()) {
-            throw OAuthServerException::invalidRequest('code_challenge', 'Code challenge must be provided for public clients');
+            throw OAuthServerException::invalidRequest(
+                'code_challenge',
+                'Code challenge must be provided for public clients'
+            );
         }
 
         return $authorizationRequest;
@@ -328,7 +315,7 @@ class AuthCodeGrant extends AbstractAuthorizeGrant
     /**
      * {@inheritdoc}
      */
-    public function completeAuthorizationRequest(AuthorizationRequest $authorizationRequest)
+    public function completeAuthorizationRequest(AuthorizationRequest $authorizationRequest): ResponseTypeInterface
     {
         if ($authorizationRequest->getUser() instanceof UserEntityInterface === false) {
             throw new LogicException('An instance of UserEntityInterface should be set on the AuthorizationRequest');
@@ -392,12 +379,8 @@ class AuthCodeGrant extends AbstractAuthorizeGrant
 
     /**
      * Get the client redirect URI if not set in the request.
-     *
-     * @param AuthorizationRequest $authorizationRequest
-     *
-     * @return string
      */
-    private function getClientRedirectUri(AuthorizationRequest $authorizationRequest)
+    private function getClientRedirectUri(AuthorizationRequest $authorizationRequest): string
     {
         return \is_array($authorizationRequest->getClient()->getRedirectUri())
                 ? $authorizationRequest->getClient()->getRedirectUri()[0]

@@ -26,7 +26,7 @@ class AuthCodeRepository implements AuthCodeRepositoryInterface
     /**
      * {@inheritdoc}
      */
-    public function revokeAuthCode($codeId)
+    public function revokeAuthCode(string $codeId)
     {
         // Some logic to revoke the auth code in a database
     }
@@ -34,7 +34,7 @@ class AuthCodeRepository implements AuthCodeRepositoryInterface
     /**
      * {@inheritdoc}
      */
-    public function isAuthCodeRevoked($codeId)
+    public function isAuthCodeRevoked(string $codeId)
     {
         return false; // The auth code has not been revoked
     }

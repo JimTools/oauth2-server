@@ -16,12 +16,11 @@ class RequestRefreshTokenEvent extends RequestEvent
 {
     private RefreshTokenEntityInterface $refreshToken;
 
-    /**
-     * @param string                 $name
-     * @param ServerRequestInterface $request
-     */
-    public function __construct($name, ServerRequestInterface $request, RefreshTokenEntityInterface $refreshToken)
-    {
+    public function __construct(
+        string $name,
+        ServerRequestInterface $request,
+        RefreshTokenEntityInterface $refreshToken
+    ) {
         parent::__construct($name, $request);
         $this->refreshToken = $refreshToken;
     }
@@ -30,7 +29,7 @@ class RequestRefreshTokenEvent extends RequestEvent
      * @return RefreshTokenEntityInterface
      * @codeCoverageIgnore
      */
-    public function getRefreshToken()
+    public function getRefreshToken(): RefreshTokenEntityInterface
     {
         return $this->refreshToken;
     }

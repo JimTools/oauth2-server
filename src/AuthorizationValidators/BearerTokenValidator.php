@@ -37,22 +37,18 @@ class BearerTokenValidator implements AuthorizationValidatorInterface
 
     private ?DateInterval $jwtValidAtDateLeeway;
 
-    /**
-     * @param AccessTokenRepositoryInterface $accessTokenRepository
-     * @param \DateInterval|null             $jwtValidAtDateLeeway
-     */
-    public function __construct(AccessTokenRepositoryInterface $accessTokenRepository, \DateInterval $jwtValidAtDateLeeway = null)
-    {
+    public function __construct(
+        AccessTokenRepositoryInterface $accessTokenRepository,
+        DateInterval $jwtValidAtDateLeeway = null,
+    ) {
         $this->accessTokenRepository = $accessTokenRepository;
         $this->jwtValidAtDateLeeway = $jwtValidAtDateLeeway;
     }
 
     /**
      * Set the public key
-     *
-     * @param CryptKey $key
      */
-    public function setPublicKey(CryptKey $key)
+    public function setPublicKey(CryptKey $key): void
     {
         $this->publicKey = $key;
 
@@ -62,7 +58,7 @@ class BearerTokenValidator implements AuthorizationValidatorInterface
     /**
      * Initialise the JWT configuration.
      */
-    private function initJwtConfiguration()
+    private function initJwtConfiguration(): void
     {
         $this->jwtConfiguration = Configuration::forSymmetricSigner(
             new Sha256(),
@@ -84,7 +80,7 @@ class BearerTokenValidator implements AuthorizationValidatorInterface
     /**
      * {@inheritdoc}
      */
-    public function validateAuthorization(ServerRequestInterface $request)
+    public function validateAuthorization(ServerRequestInterface $request): ServerRequestInterface
     {
         if ($request->hasHeader('authorization') === false) {
             throw OAuthServerException::accessDenied('Missing "Authorization" header');
@@ -130,7 +126,7 @@ class BearerTokenValidator implements AuthorizationValidatorInterface
      *
      * @return array|string
      */
-    private function convertSingleRecordAudToString($aud)
+    private function convertSingleRecordAudToString(mixed $aud): array|string
     {
         return \is_array($aud) && \count($aud) === 1 ? $aud[0] : $aud;
     }

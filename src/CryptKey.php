@@ -81,13 +81,8 @@ class CryptKey
 
     /**
      * Validate key contents.
-     *
-     * @param string $contents
-     * @param string $passPhrase
-     *
-     * @return bool
      */
-    private function isValidKey($contents, $passPhrase)
+    private function isValidKey(string $contents, string $passPhrase): bool
     {
         $pkey = \openssl_pkey_get_private($contents, $passPhrase) ?: \openssl_pkey_get_public($contents);
         if ($pkey === false) {
@@ -107,7 +102,7 @@ class CryptKey
      *
      * @return string
      */
-    public function getKeyPath()
+    public function getKeyPath(): string
     {
         return $this->keyPath;
     }
@@ -117,7 +112,7 @@ class CryptKey
      *
      * @return null|string
      */
-    public function getPassPhrase()
+    public function getPassPhrase(): ?string
     {
         return $this->passPhrase;
     }

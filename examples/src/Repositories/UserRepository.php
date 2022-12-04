@@ -19,9 +19,9 @@ class UserRepository implements UserRepositoryInterface
      * {@inheritdoc}
      */
     public function getUserEntityByUserCredentials(
-        $username,
-        $password,
-        $grantType,
+        string $username,
+        string $password,
+        string $grantType,
         ClientEntityInterface $clientEntity
     ) {
         if ($username === 'alex' && $password === 'whisky') {

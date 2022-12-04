@@ -19,23 +19,16 @@ class AuthorizationServerMiddleware
 {
     private AuthorizationServer $server;
 
-    /**
-     * @param AuthorizationServer $server
-     */
     public function __construct(AuthorizationServer $server)
     {
         $this->server = $server;
     }
 
-    /**
-     * @param ServerRequestInterface $request
-     * @param ResponseInterface      $response
-     * @param callable               $next
-     *
-     * @return ResponseInterface
-     */
-    public function __invoke(ServerRequestInterface $request, ResponseInterface $response, callable $next)
-    {
+    public function __invoke(
+        ServerRequestInterface $request,
+        ResponseInterface $response,
+        callable $next
+    ): ResponseInterface {
         try {
             $response = $this->server->respondToAccessTokenRequest($request, $response);
         } catch (OAuthServerException $exception) {

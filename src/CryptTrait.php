@@ -23,13 +23,9 @@ trait CryptTrait
     /**
      * Encrypt data with encryptionKey.
      *
-     * @param string $unencryptedData
-     *
      * @throws LogicException
-     *
-     * @return string
      */
-    protected function encrypt($unencryptedData)
+    protected function encrypt(string $unencryptedData): string
     {
         try {
             if ($this->encryptionKey instanceof Key) {
@@ -49,13 +45,9 @@ trait CryptTrait
     /**
      * Decrypt data with encryptionKey.
      *
-     * @param string $encryptedData
-     *
      * @throws LogicException
-     *
-     * @return string
      */
-    protected function decrypt($encryptedData)
+    protected function decrypt(string $encryptedData): string
     {
         try {
             if ($this->encryptionKey instanceof Key) {
@@ -74,10 +66,8 @@ trait CryptTrait
 
     /**
      * Set the encryption key
-     *
-     * @param string|Key $key
      */
-    public function setEncryptionKey($key = null)
+    public function setEncryptionKey(Key|string $key = null): void
     {
         $this->encryptionKey = $key;
     }

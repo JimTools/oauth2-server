@@ -18,10 +18,7 @@ use Psr\Http\Message\ResponseInterface;
 
 class BearerTokenResponse extends AbstractResponseType
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function generateHttpResponse(ResponseInterface $response)
+    public function generateHttpResponse(ResponseInterface $response): ResponseInterface
     {
         $expireDateTime = $this->accessToken->getExpiryDateTime()->getTimestamp();
 
@@ -69,12 +66,8 @@ class BearerTokenResponse extends AbstractResponseType
      * Add custom fields to your Bearer Token response here, then override
      * AuthorizationServer::getResponseType() to pull in your version of
      * this class rather than the default.
-     *
-     * @param AccessTokenEntityInterface $accessToken
-     *
-     * @return array
      */
-    protected function getExtraParams(AccessTokenEntityInterface $accessToken)
+    protected function getExtraParams(AccessTokenEntityInterface $accessToken): array
     {
         return [];
     }

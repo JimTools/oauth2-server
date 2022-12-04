@@ -59,20 +59,13 @@ class AuthorizationServer implements EmitterAwareInterface
 
     /**
      * New server instance.
-     *
-     * @param ClientRepositoryInterface      $clientRepository
-     * @param AccessTokenRepositoryInterface $accessTokenRepository
-     * @param ScopeRepositoryInterface       $scopeRepository
-     * @param CryptKey|string                $privateKey
-     * @param string|Key                     $encryptionKey
-     * @param null|ResponseTypeInterface     $responseType
      */
     public function __construct(
         ClientRepositoryInterface $clientRepository,
         AccessTokenRepositoryInterface $accessTokenRepository,
         ScopeRepositoryInterface $scopeRepository,
-        $privateKey,
-        $encryptionKey,
+        CryptKey|string $privateKey,
+        Key|string $encryptionKey,
         ResponseTypeInterface $responseType = null
     ) {
         $this->clientRepository = $clientRepository;
@@ -97,11 +90,8 @@ class AuthorizationServer implements EmitterAwareInterface
 
     /**
      * Enable a grant type on the server.
-     *
-     * @param GrantTypeInterface $grantType
-     * @param null|DateInterval  $accessTokenTTL
      */
-    public function enableGrantType(GrantTypeInterface $grantType, DateInterval $accessTokenTTL = null)
+    public function enableGrantType(GrantTypeInterface $grantType, DateInterval $accessTokenTTL = null): void
     {
         if ($accessTokenTTL === null) {
             $accessTokenTTL = new DateInterval('PT1H');
@@ -123,13 +113,9 @@ class AuthorizationServer implements EmitterAwareInterface
     /**
      * Validate an authorization request
      *
-     * @param ServerRequestInterface $request
-     *
      * @throws OAuthServerException
-     *
-     * @return AuthorizationRequest
      */
-    public function validateAuthorizationRequest(ServerRequestInterface $request)
+    public function validateAuthorizationRequest(ServerRequestInterface $request): AuthorizationRequest
     {
         foreach ($this->enabledGrantTypes as $grantType) {
             if ($grantType->canRespondToAuthorizationRequest($request)) {
@@ -143,13 +129,12 @@ class AuthorizationServer implements EmitterAwareInterface
     /**
      * Complete an authorization request
      *
-     * @param AuthorizationRequest $authRequest
-     * @param ResponseInterface    $response
-     *
-     * @return ResponseInterface
+     * @throws OAuthServerException
      */
-    public function completeAuthorizationRequest(AuthorizationRequest $authRequest, ResponseInterface $response)
-    {
+    public function completeAuthorizationRequest(
+        AuthorizationRequest $authRequest,
+        ResponseInterface $response
+    ): ResponseInterface {
         return $this->enabledGrantTypes[$authRequest->getGrantTypeId()]
             ->completeAuthorizationRequest($authRequest)
             ->generateHttpResponse($response);
@@ -158,15 +143,12 @@ class AuthorizationServer implements EmitterAwareInterface
     /**
      * Return an access token response.
      *
-     * @param ServerRequestInterface $request
-     * @param ResponseInterface      $response
-     *
      * @throws OAuthServerException
-     *
-     * @return ResponseInterface
      */
-    public function respondToAccessTokenRequest(ServerRequestInterface $request, ResponseInterface $response)
-    {
+    public function respondToAccessTokenRequest(
+        ServerRequestInterface $request,
+        ResponseInterface $response
+    ): ResponseInterface {
         foreach ($this->enabledGrantTypes as $grantType) {
             if (!$grantType->canRespondToAccessTokenRequest($request)) {
                 continue;
@@ -187,10 +169,8 @@ class AuthorizationServer implements EmitterAwareInterface
 
     /**
      * Get the token type that grants will return in the HTTP response.
-     *
-     * @return ResponseTypeInterface
      */
-    protected function getResponseType()
+    protected function getResponseType(): ResponseTypeInterface
     {
         $responseType = clone $this->responseType;
 
@@ -205,18 +185,14 @@ class AuthorizationServer implements EmitterAwareInterface
 
     /**
      * Set the default scope for the authorization server.
-     *
-     * @param string $defaultScope
      */
-    public function setDefaultScope($defaultScope)
+    public function setDefaultScope(string $defaultScope): void
     {
         $this->defaultScope = $defaultScope;
     }
 
     /**
      * Sets whether to revoke refresh tokens or not (for all grant types).
-     *
-     * @param bool $revokeRefreshTokens
      */
     public function revokeRefreshTokens(bool $revokeRefreshTokens): void
     {

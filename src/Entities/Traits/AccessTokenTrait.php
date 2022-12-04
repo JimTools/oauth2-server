@@ -27,7 +27,7 @@ trait AccessTokenTrait
     /**
      * Set the private key used to encrypt this access token.
      */
-    public function setPrivateKey(CryptKey $privateKey)
+    public function setPrivateKey(CryptKey $privateKey): void
     {
         $this->privateKey = $privateKey;
     }
@@ -35,7 +35,7 @@ trait AccessTokenTrait
     /**
      * Initialise the JWT Configuration.
      */
-    public function initJwtConfiguration()
+    public function initJwtConfiguration(): void
     {
         $this->jwtConfiguration = Configuration::forAsymmetricSigner(
             new Sha256(),
@@ -46,10 +46,8 @@ trait AccessTokenTrait
 
     /**
      * Generate a JWT from the access token
-     *
-     * @return Token
      */
-    private function convertToJWT()
+    private function convertToJWT(): Token
     {
         $this->initJwtConfiguration();
 
@@ -72,28 +70,16 @@ trait AccessTokenTrait
         return $this->convertToJWT()->toString();
     }
 
-    /**
-     * @return ClientEntityInterface
-     */
-    abstract public function getClient();
+    abstract public function getClient(): ClientEntityInterface;
 
-    /**
-     * @return DateTimeImmutable
-     */
-    abstract public function getExpiryDateTime();
+    abstract public function getExpiryDateTime(): DateTimeImmutable;
 
-    /**
-     * @return string|int
-     */
-    abstract public function getUserIdentifier();
+    abstract public function getUserIdentifier(): int|string;
 
     /**
      * @return ScopeEntityInterface[]
      */
-    abstract public function getScopes();
+    abstract public function getScopes(): array;
 
-    /**
-     * @return string
-     */
-    abstract public function getIdentifier();
+    abstract public function getIdentifier(): string;
 }

@@ -27,7 +27,7 @@ class AccessTokenRepository implements AccessTokenRepositoryInterface
     /**
      * {@inheritdoc}
      */
-    public function revokeAccessToken($tokenId)
+    public function revokeAccessToken(string $tokenId)
     {
         // Some logic here to revoke the access token
     }
@@ -35,7 +35,7 @@ class AccessTokenRepository implements AccessTokenRepositoryInterface
     /**
      * {@inheritdoc}
      */
-    public function isAccessTokenRevoked($tokenId)
+    public function isAccessTokenRevoked(string $tokenId)
     {
         return false; // Access token hasn't been revoked
     }
@@ -43,7 +43,7 @@ class AccessTokenRepository implements AccessTokenRepositoryInterface
     /**
      * {@inheritdoc}
      */
-    public function getNewToken(ClientEntityInterface $clientEntity, array $scopes, $userIdentifier = null)
+    public function getNewToken(ClientEntityInterface $clientEntity, array $scopes, mixed $userIdentifier = null)
     {
         $accessToken = new AccessTokenEntity();
         $accessToken->setClient($clientEntity);

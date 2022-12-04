@@ -10,6 +10,7 @@
 namespace OAuth2ServerExamples\Repositories;
 
 use League\OAuth2\Server\Entities\ClientEntityInterface;
+use League\OAuth2\Server\Entities\ScopeEntityInterface;
 use League\OAuth2\Server\Repositories\ScopeRepositoryInterface;
 use OAuth2ServerExamples\Entities\ScopeEntity;
 
@@ -18,7 +19,7 @@ class ScopeRepository implements ScopeRepositoryInterface
     /**
      * {@inheritdoc}
      */
-    public function getScopeEntityByIdentifier($scopeIdentifier)
+    public function getScopeEntityByIdentifier(string $identifier): ?ScopeEntityInterface
     {
         $scopes = [
             'basic' => [
@@ -29,12 +30,12 @@ class ScopeRepository implements ScopeRepositoryInterface
             ],
         ];
 
-        if (\array_key_exists($scopeIdentifier, $scopes) === false) {
-            return;
+        if (\array_key_exists($identifier, $scopes) === false) {
+            return null;
         }
 
         $scope = new ScopeEntity();
-        $scope->setIdentifier($scopeIdentifier);
+        $scope->setIdentifier($identifier);
 
         return $scope;
     }
@@ -44,11 +45,11 @@ class ScopeRepository implements ScopeRepositoryInterface
      */
     public function finalizeScopes(
         array $scopes,
-        $grantType,
+        string $grantType,
         ClientEntityInterface $clientEntity,
-        $userIdentifier = null
-    ) {
-        // Example of programatically modifying the final scope of the access token
+        string $userIdentifier = null
+    ): array {
+        // Example of programmatically modifying the final scope of the access token
         if ((int) $userIdentifier === 1) {
             $scope = new ScopeEntity();
             $scope->setIdentifier('email');

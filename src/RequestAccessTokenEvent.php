@@ -16,21 +16,16 @@ class RequestAccessTokenEvent extends RequestEvent
 {
     private AccessTokenEntityInterface $accessToken;
 
-    /**
-     * @param string                 $name
-     * @param ServerRequestInterface $request
-     */
-    public function __construct($name, ServerRequestInterface $request, AccessTokenEntityInterface $accessToken)
+    public function __construct(string $name, ServerRequestInterface $request, AccessTokenEntityInterface $accessToken)
     {
         parent::__construct($name, $request);
         $this->accessToken = $accessToken;
     }
 
     /**
-     * @return AccessTokenEntityInterface
      * @codeCoverageIgnore
      */
-    public function getAccessToken()
+    public function getAccessToken(): AccessTokenEntityInterface
     {
         return $this->accessToken;
     }

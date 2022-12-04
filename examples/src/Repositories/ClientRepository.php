@@ -20,7 +20,7 @@ class ClientRepository implements ClientRepositoryInterface
     /**
      * {@inheritdoc}
      */
-    public function getClientEntity($clientIdentifier)
+    public function getClientEntity(string $clientIdentifier)
     {
         $client = new ClientEntity();
 
@@ -35,7 +35,7 @@ class ClientRepository implements ClientRepositoryInterface
     /**
      * {@inheritdoc}
      */
-    public function validateClient($clientIdentifier, $clientSecret, $grantType)
+    public function validateClient(string $clientIdentifier, ?string $clientSecret, ?string $grantType)
     {
         $clients = [
             'myawesomeapp' => [

@@ -13,10 +13,7 @@ trait AuthCodeTrait
 {
     protected ?string $redirectUri = null;
 
-    /**
-     * @return string|null
-     */
-    public function getRedirectUri()
+    public function getRedirectUri(): ?string
     {
         return $this->redirectUri;
     }
@@ -24,7 +21,7 @@ trait AuthCodeTrait
     /**
      * @param string $uri
      */
-    public function setRedirectUri($uri)
+    public function setRedirectUri(string $uri): void
     {
         $this->redirectUri = $uri;
     }

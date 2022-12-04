@@ -26,18 +26,12 @@ abstract class AbstractResponseType implements ResponseTypeInterface
 
     protected CryptKey $privateKey;
 
-    /**
-     * {@inheritdoc}
-     */
-    public function setAccessToken(AccessTokenEntityInterface $accessToken)
+    public function setAccessToken(AccessTokenEntityInterface $accessToken): void
     {
         $this->accessToken = $accessToken;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function setRefreshToken(RefreshTokenEntityInterface $refreshToken)
+    public function setRefreshToken(RefreshTokenEntityInterface $refreshToken): void
     {
         $this->refreshToken = $refreshToken;
     }
@@ -47,7 +41,7 @@ abstract class AbstractResponseType implements ResponseTypeInterface
      *
      * @param CryptKey $key
      */
-    public function setPrivateKey(CryptKey $key)
+    public function setPrivateKey(CryptKey $key): void
     {
         $this->privateKey = $key;
     }

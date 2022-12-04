@@ -26,9 +26,6 @@ use Psr\Http\Message\ServerRequestInterface;
  */
 class RefreshTokenGrant extends AbstractGrant
 {
-    /**
-     * @param RefreshTokenRepositoryInterface $refreshTokenRepository
-     */
     public function __construct(RefreshTokenRepositoryInterface $refreshTokenRepository)
     {
         $this->setRefreshTokenRepository($refreshTokenRepository);
@@ -43,7 +40,7 @@ class RefreshTokenGrant extends AbstractGrant
         ServerRequestInterface $request,
         ResponseTypeInterface $responseType,
         DateInterval $accessTokenTTL
-    ) {
+    ): ResponseTypeInterface {
         // Validate request
         $client = $this->validateClient($request);
         $oldRefreshToken = $this->validateOldRefreshToken($request, $client->getIdentifier());
@@ -88,14 +85,9 @@ class RefreshTokenGrant extends AbstractGrant
     }
 
     /**
-     * @param ServerRequestInterface $request
-     * @param string                 $clientId
-     *
      * @throws OAuthServerException
-     *
-     * @return array
      */
-    protected function validateOldRefreshToken(ServerRequestInterface $request, $clientId)
+    protected function validateOldRefreshToken(ServerRequestInterface $request, string $clientId): array
     {
         $encryptedRefreshToken = $this->getRequestParameter('refresh_token', $request);
         if (!\is_string($encryptedRefreshToken)) {
@@ -129,7 +121,7 @@ class RefreshTokenGrant extends AbstractGrant
     /**
      * {@inheritdoc}
      */
-    public function getIdentifier()
+    public function getIdentifier(): string
     {
         return 'refresh_token';
     }

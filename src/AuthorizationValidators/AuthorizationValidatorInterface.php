@@ -9,6 +9,7 @@
 
 namespace League\OAuth2\Server\AuthorizationValidators;
 
+use League\OAuth2\Server\Exception\OAuthServerException;
 use Psr\Http\Message\ServerRequestInterface;
 
 interface AuthorizationValidatorInterface
@@ -17,9 +18,7 @@ interface AuthorizationValidatorInterface
      * Determine the access token in the authorization header and append OAUth properties to the request
      *  as attributes.
      *
-     * @param ServerRequestInterface $request
-     *
-     * @return ServerRequestInterface
+     * @throws OAuthServerException
      */
-    public function validateAuthorization(ServerRequestInterface $request);
+    public function validateAuthorization(ServerRequestInterface $request): ServerRequestInterface;
 }

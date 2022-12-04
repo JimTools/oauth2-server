@@ -19,22 +19,16 @@ class ResourceServerMiddleware
 {
     private ResourceServer $server;
 
-    /**
-     * @param ResourceServer $server
-     */
     public function __construct(ResourceServer $server)
     {
         $this->server = $server;
     }
 
-    /**
-     * @param ServerRequestInterface $request
-     * @param ResponseInterface      $response
-     * @param callable               $next
-     *
-     * @return ResponseInterface
-     */
-    public function __invoke(ServerRequestInterface $request, ResponseInterface $response, callable $next)
+    public function __invoke(
+        ServerRequestInterface $request,
+        ResponseInterface $response,
+        callable $next
+    ): ResponseInterface
     {
         try {
             $request = $this->server->validateAuthenticatedRequest($request);

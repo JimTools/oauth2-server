@@ -23,10 +23,9 @@ trait ClientTrait
     /**
      * Get the client's name.
      *
-     * @return string
      * @codeCoverageIgnore
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
@@ -38,17 +37,15 @@ trait ClientTrait
      *
      * @return string|string[]
      */
-    public function getRedirectUri()
+    public function getRedirectUri(): array|string
     {
         return $this->redirectUri;
     }
 
     /**
      * Returns true if the client is confidential.
-     *
-     * @return bool
      */
-    public function isConfidential()
+    public function isConfidential(): bool
     {
         return $this->isConfidential;
     }

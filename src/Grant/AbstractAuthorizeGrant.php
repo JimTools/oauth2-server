@@ -13,14 +13,7 @@ namespace League\OAuth2\Server\Grant;
 
 abstract class AbstractAuthorizeGrant extends AbstractGrant
 {
-    /**
-     * @param string $uri
-     * @param array  $params
-     * @param string $queryDelimiter
-     *
-     * @return string
-     */
-    public function makeRedirectUri($uri, $params = [], $queryDelimiter = '?')
+    public function makeRedirectUri(string $uri, array $params = [], string $queryDelimiter = '?'): string
     {
         $uri .= (\strstr($uri, $queryDelimiter) === false) ? $queryDelimiter : '&';
 

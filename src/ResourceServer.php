@@ -25,14 +25,10 @@ class ResourceServer
 
     /**
      * New server instance.
-     *
-     * @param AccessTokenRepositoryInterface       $accessTokenRepository
-     * @param CryptKey|string                      $publicKey
-     * @param null|AuthorizationValidatorInterface $authorizationValidator
      */
     public function __construct(
         AccessTokenRepositoryInterface $accessTokenRepository,
-        $publicKey,
+        CryptKey|string $publicKey,
         AuthorizationValidatorInterface $authorizationValidator = null
     ) {
         $this->accessTokenRepository = $accessTokenRepository;
@@ -45,10 +41,7 @@ class ResourceServer
         $this->authorizationValidator = $authorizationValidator;
     }
 
-    /**
-     * @return AuthorizationValidatorInterface
-     */
-    protected function getAuthorizationValidator()
+    protected function getAuthorizationValidator(): AuthorizationValidatorInterface
     {
         if ($this->authorizationValidator instanceof AuthorizationValidatorInterface === false) {
             $this->authorizationValidator = new BearerTokenValidator($this->accessTokenRepository);
@@ -64,13 +57,9 @@ class ResourceServer
     /**
      * Determine the access token validity.
      *
-     * @param ServerRequestInterface $request
-     *
      * @throws OAuthServerException
-     *
-     * @return ServerRequestInterface
      */
-    public function validateAuthenticatedRequest(ServerRequestInterface $request)
+    public function validateAuthenticatedRequest(ServerRequestInterface $request): ServerRequestInterface
     {
         return $this->getAuthorizationValidator()->validateAuthorization($request);
     }
