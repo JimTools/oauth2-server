@@ -262,7 +262,7 @@ class AuthCodeGrantTest extends TestCase
             'code_challenge' => \str_repeat('A', 42),
         ]);
 
-        $this->expectException(\League\OAuth2\Server\Exception\OAuthServerException::class);
+        $this->expectException(OAuthServerException::class);
 
         $grant->validateAuthorizationRequest($request);
     }
@@ -289,7 +289,7 @@ class AuthCodeGrantTest extends TestCase
             'code_challenge' => \str_repeat('A', 129),
         ]);
 
-        $this->expectException(\League\OAuth2\Server\Exception\OAuthServerException::class);
+        $this->expectException(OAuthServerException::class);
 
         $grant->validateAuthorizationRequest($request);
     }
@@ -316,7 +316,7 @@ class AuthCodeGrantTest extends TestCase
             'code_challenge' => \str_repeat('A', 42) . '!',
         ]);
 
-        $this->expectException(\League\OAuth2\Server\Exception\OAuthServerException::class);
+        $this->expectException(OAuthServerException::class);
 
         $grant->validateAuthorizationRequest($request);
     }
@@ -336,7 +336,7 @@ class AuthCodeGrantTest extends TestCase
             'response_type' => 'code',
         ]);
 
-        $this->expectException(\League\OAuth2\Server\Exception\OAuthServerException::class);
+        $this->expectException(OAuthServerException::class);
         $this->expectExceptionCode(3);
 
         $grant->validateAuthorizationRequest($request);
@@ -359,7 +359,7 @@ class AuthCodeGrantTest extends TestCase
             'client_id'     => 'foo',
         ]);
 
-        $this->expectException(\League\OAuth2\Server\Exception\OAuthServerException::class);
+        $this->expectException(OAuthServerException::class);
         $this->expectExceptionCode(4);
 
         $grant->validateAuthorizationRequest($request);
@@ -385,7 +385,7 @@ class AuthCodeGrantTest extends TestCase
             'redirect_uri'  => 'http://bar',
         ]);
 
-        $this->expectException(\League\OAuth2\Server\Exception\OAuthServerException::class);
+        $this->expectException(OAuthServerException::class);
         $this->expectExceptionCode(4);
 
         $grant->validateAuthorizationRequest($request);
@@ -411,7 +411,7 @@ class AuthCodeGrantTest extends TestCase
             'redirect_uri'  => 'http://bar',
         ]);
 
-        $this->expectException(\League\OAuth2\Server\Exception\OAuthServerException::class);
+        $this->expectException(OAuthServerException::class);
         $this->expectExceptionCode(4);
 
         $grant->validateAuthorizationRequest($request);
@@ -446,7 +446,7 @@ class AuthCodeGrantTest extends TestCase
             'code_challenge_method' => 'foo',
         ]);
 
-        $this->expectException(\League\OAuth2\Server\Exception\OAuthServerException::class);
+        $this->expectException(OAuthServerException::class);
         $this->expectExceptionCode(3);
 
         $grant->validateAuthorizationRequest($request);
@@ -491,7 +491,7 @@ class AuthCodeGrantTest extends TestCase
         );
         $grant->setEncryptionKey($this->cryptStub->getKey());
 
-        $this->expectException(\League\OAuth2\Server\Exception\OAuthServerException::class);
+        $this->expectException(OAuthServerException::class);
         $this->expectExceptionCode(9);
 
         $grant->completeAuthorizationRequest($authRequest);
@@ -956,7 +956,7 @@ class AuthCodeGrantTest extends TestCase
             ]
         );
 
-        $this->expectException(\League\OAuth2\Server\Exception\OAuthServerException::class);
+        $this->expectException(OAuthServerException::class);
         $this->expectExceptionCode(3);
 
         $grant->respondToAccessTokenRequest($request, new StubResponseType(), new DateInterval('PT10M'));
@@ -1005,7 +1005,7 @@ class AuthCodeGrantTest extends TestCase
             ]
         );
 
-        $this->expectException(\League\OAuth2\Server\Exception\OAuthServerException::class);
+        $this->expectException(OAuthServerException::class);
         $this->expectExceptionCode(3);
 
         $grant->respondToAccessTokenRequest($request, new StubResponseType(), new DateInterval('PT10M'));
@@ -1049,7 +1049,7 @@ class AuthCodeGrantTest extends TestCase
             ]
         );
 
-        $this->expectException(\League\OAuth2\Server\Exception\OAuthServerException::class);
+        $this->expectException(OAuthServerException::class);
         $this->expectExceptionCode(3);
 
         /* @var StubResponseType $response */
@@ -1143,7 +1143,7 @@ class AuthCodeGrantTest extends TestCase
             ]
         );
 
-        $this->expectException(\League\OAuth2\Server\Exception\OAuthServerException::class);
+        $this->expectException(OAuthServerException::class);
         $grant->respondToAccessTokenRequest($request, new StubResponseType(), new DateInterval('PT10M'));
     }
 
@@ -1791,7 +1791,7 @@ class AuthCodeGrantTest extends TestCase
         );
         $grant->setEncryptionKey($this->cryptStub->getKey());
 
-        $this->expectException(\League\OAuth2\Server\Exception\OAuthServerException::class);
+        $this->expectException(OAuthServerException::class);
         $this->expectExceptionCode(7);
 
         $this->assertInstanceOf(RedirectResponse::class, $grant->completeAuthorizationRequest($authRequest));
@@ -1960,7 +1960,7 @@ class AuthCodeGrantTest extends TestCase
             ]
         );
 
-        $this->expectException(\League\OAuth2\Server\Exception\OAuthServerException::class);
+        $this->expectException(OAuthServerException::class);
         $this->expectExceptionCode(7);
 
         /** @var StubResponseType $response */

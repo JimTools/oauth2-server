@@ -16,7 +16,7 @@ trait ClientTrait
     /**
      * @var string|string[]
      */
-    protected string|array $redirectUri;
+    protected string|array $redirectUri = '';
 
     protected bool $isConfidential = false;
 
@@ -35,7 +35,7 @@ trait ClientTrait
      *
      * Alternatively return an indexed array of redirect URIs.
      *
-     * @return string|string[]
+     * @return string|string[]|null
      */
     public function getRedirectUri(): array|string
     {

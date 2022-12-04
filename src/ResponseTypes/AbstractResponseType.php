@@ -20,11 +20,11 @@ abstract class AbstractResponseType implements ResponseTypeInterface
 {
     use CryptTrait;
 
-    protected AccessTokenEntityInterface $accessToken;
+    protected ?AccessTokenEntityInterface $accessToken = null;
 
-    protected RefreshTokenEntityInterface $refreshToken;
+    protected ?RefreshTokenEntityInterface $refreshToken = null;
 
-    protected CryptKey $privateKey;
+    protected ?CryptKey $privateKey = null;
 
     public function setAccessToken(AccessTokenEntityInterface $accessToken): void
     {

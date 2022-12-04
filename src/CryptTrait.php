@@ -18,7 +18,7 @@ use LogicException;
 
 trait CryptTrait
 {
-    protected string|null|Key $encryptionKey;
+    protected string|null|Key $encryptionKey = null;
 
     /**
      * Encrypt data with encryptionKey.

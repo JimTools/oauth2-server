@@ -22,7 +22,7 @@ trait TokenEntityTrait
 
     protected DateTimeImmutable $expiryDateTime;
 
-    protected string|int|null $userIdentifier;
+    protected string|int|null $userIdentifier = null;
 
     protected ClientEntityInterface $client;
 

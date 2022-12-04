@@ -28,7 +28,7 @@ class AuthorizationRequest
     /**
      * The user identifier
      */
-    protected UserEntityInterface $user;
+    protected ?UserEntityInterface $user = null;
 
     /**
      * An array of scope identifiers
@@ -45,12 +45,12 @@ class AuthorizationRequest
     /**
      * The redirect URI used in the request
      */
-    protected ?string $redirectUri;
+    protected ?string $redirectUri = null;
 
     /**
      * The state parameter on the authorization request
      */
-    protected ?string $state;
+    protected ?string $state = null;
 
     /**
      * The code challenge (if provided)

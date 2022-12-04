@@ -65,13 +65,10 @@ abstract class AbstractGrant implements GrantTypeInterface
 
     protected CryptKey $privateKey;
 
-    protected string $defaultScope;
+    protected ?string $defaultScope = null;
 
-    protected bool $revokeRefreshTokens;
+    protected bool $revokeRefreshTokens = false;
 
-    /**
-     * @param ClientRepositoryInterface $clientRepository
-     */
     public function setClientRepository(ClientRepositoryInterface $clientRepository): void
     {
         $this->clientRepository = $clientRepository;
@@ -186,6 +183,8 @@ abstract class AbstractGrant implements GrantTypeInterface
     /**
      * Gets the client credentials from the request from the request body or
      * the Http Basic Authorization header
+     *
+     * @return string[]
      *
      * @throws OAuthServerException
      */
